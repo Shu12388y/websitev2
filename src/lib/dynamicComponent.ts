@@ -78,7 +78,7 @@ export const dynamicComponent = (key: string) => {
       customerReview: CustomerReview,
       reviewProps: reviews_Ejacure,
       allReviewProps: allReviews_Testofix,
-      featureImg: "/Sexuloon Ejacure web design.jpg",
+      featureImg: "/Sexuloon Testofix  web design.jpg",
       cta: OurPromise,
       ctaProps: promises_Testofix,
     },
