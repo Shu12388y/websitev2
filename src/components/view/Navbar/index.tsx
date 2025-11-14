@@ -1,11 +1,17 @@
 "use client";
 
-import SignIn from "@/components/ui/signin";
 import { useCartActions } from "@/lib/atoms/cart";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartView from "../Cart/CartView";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 function Navbar() {
   const { cart, initializeCart } = useCartActions();
@@ -83,9 +89,34 @@ function Navbar() {
 
         {/* Actions + Hamburger */}
         <div className="flex items-center space-x-4">
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-3">
             <CartView />
-            <SignIn />
+            
+            <SignedOut>
+              {/* Sign In Button */}
+              <SignInButton mode="modal">
+                <button className="hidden sm:flex items-center justify-center bg-white text-black border-2 border-black rounded-full font-semibold text-sm sm:text-base h-10 sm:h-11 px-5 sm:px-6 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
+                  Sign In
+                </button>
+              </SignInButton>
+
+              {/* Sign Up Button */}
+              <SignUpButton mode="modal">
+                <button className="flex items-center justify-center bg-black text-white rounded-full font-semibold text-sm sm:text-base h-10 sm:h-11 px-5 sm:px-6 hover:bg-gray-800 transition-all duration-200 cursor-pointer shadow-sm">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton 
+                appearance={{
+                  elements: {
+                    avatarBox: "w-10 h-10 sm:w-11 sm:h-11"
+                  }
+                }}
+              />
+            </SignedIn>
           </div>
 
           {/* Hamburger */}
@@ -125,6 +156,22 @@ function Navbar() {
       {isMenuOpen && (
         <div className="min-[1030px]:hidden bg-white py-4 px-4 shadow-md">
           <div className="flex flex-col items-start space-y-4 w-full">
+            {/* Mobile Auth Buttons */}
+            <SignedOut>
+              <div className="flex gap-3 w-full pb-2 border-b border-gray-200">
+                <SignInButton mode="modal">
+                  <button className="flex-1 bg-white text-black border-2 border-black rounded-full font-semibold text-base h-11 hover:bg-black hover:text-white transition-all duration-200">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="flex-1 bg-black text-white rounded-full font-semibold text-base h-11 hover:bg-gray-800 transition-all duration-200">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
+
             <Link
               href="/"
               className="w-full text-[18px] font-semibold text-black px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all text-left"

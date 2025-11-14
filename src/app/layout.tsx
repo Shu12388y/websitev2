@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/view/Navbar";
 import InfiniteScrollingText from "@/components/view/SlidingText";
 import Providers from "@/providers";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import React from "react";
@@ -60,54 +61,56 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <head>
-        {/* Basic Meta */}
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
+    <ClerkProvider>
+      <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+        <head>
+          {/* Basic Meta */}
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="robots" content="index, follow" />
 
-        {/* Canonical (Optional but Good) */}
-        <link rel="canonical" href="https://www.sexuloon.in" />
+          {/* Canonical (Optional but Good) */}
+          <link rel="canonical" href="https://www.sexuloon.in" />
 
-        {/* Favicon */}
-        <link rel="icon" href="/Web_Icon-removebg-preview.ico" />
-        <link rel="shortcut icon" href="/Web_Icon-removebg-preview.ico" />
-        <link rel="apple-touch-icon" href="/Web_Icon-removebg-preview.ico" />
+          {/* Favicon */}
+          <link rel="icon" href="/Web_Icon-removebg-preview.ico" />
+          <link rel="shortcut icon" href="/Web_Icon-removebg-preview.ico" />
+          <link rel="apple-touch-icon" href="/Web_Icon-removebg-preview.ico" />
 
-        {/* Open Graph Meta (Redundant here but safe fallback) */}
-        <meta property="og:title" content="Sexuloon" />
-        <meta
-          property="og:description"
-          content="India’s Most Trusted Sexual Wellness Brand"
-        />
-        <meta property="og:image" content="/seo-banner.png" />
-        <meta property="og:url" content="https://www.sexuloon.in" />
-        <meta property="og:type" content="website" />
+          {/* Open Graph Meta (Redundant here but safe fallback) */}
+          <meta property="og:title" content="Sexuloon" />
+          <meta
+            property="og:description"
+            content="India’s Most Trusted Sexual Wellness Brand"
+          />
+          <meta property="og:image" content="/seo-banner.png" />
+          <meta property="og:url" content="https://www.sexuloon.in" />
+          <meta property="og:type" content="website" />
 
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sexuloon" />
-        <meta
-          name="twitter:description"
-          content="India’s Most Trusted Sexual Wellness Brand"
-        />
-        <meta name="twitter:image" content="/seo-banner.png" />
-      </head>
-      <body className="antialiased mx-auto max-w-8xl">
-        <PostHogProvider>
-          <Providers>
-            <InfiniteScrollingText />
-            <Navbar />
-            <Toaster />
-            {children}
-            <Footer />
-          </Providers>
-        </PostHogProvider>
-      </body>
+          {/* Twitter Cards */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Sexuloon" />
+          <meta
+            name="twitter:description"
+            content="India’s Most Trusted Sexual Wellness Brand"
+          />
+          <meta name="twitter:image" content="/seo-banner.png" />
+        </head>
+        <body className="antialiased mx-auto max-w-8xl">
+          <PostHogProvider>
+            <Providers>
+              <InfiniteScrollingText />
+              <Navbar />
+              <Toaster />
+              {children}
+              <Footer />
+            </Providers>
+          </PostHogProvider>
+        </body>
 
-      {/* Google Analytics */}
-      <GoogleAnalytics gaId="G-NP9WZN9MK4" />
-    </html>
+        {/* Google Analytics */}
+        <GoogleAnalytics gaId="G-NP9WZN9MK4" />
+      </html>
+    </ClerkProvider>
   );
 }
